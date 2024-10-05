@@ -24,7 +24,7 @@ jobs:
         cd mindspore-daily
         git config --global user.email "lvyufeng@cqu.edu.cn"
         git config --global user.name "lvyufeng"
-        git rm -rf *.whl
+        rm -rf *.whl
         cd ..
     - name: Download whl
       run: |

@@ -33,6 +33,8 @@ def gen_url(path):
 
         while matches:
             match = matches.pop(0)
+            if '39' not in match:
+                continue
             if match not in retry_count:
                 retry_count[match] = 0
             
@@ -43,6 +45,7 @@ def gen_url(path):
             save_name = 'mindspore-newest-' + match[idx:] + '.whl'
 
             whl_url = url + whl_name
+            print(whl_url)
             # # 使用 stream=True 发送 GET 请求
             response = requests.get(whl_url, stream=True)
 
@@ -55,7 +58,8 @@ def gen_url(path):
                         if chunk:
                             f.write(chunk)
                 print('Download：', save_name)
-            except:
+            except Exception as e:
+                print(e)
                 print('Resume', match)
                 matches.append(match)
                 retry_count[match] += 1
